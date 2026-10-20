@@ -1,0 +1,28 @@
+.site {
+  position: relative;
+  width: 100%;
+  background: var(--page-bg);
+}
+
+/* 第一屏：完全复刻 Fluid Glass 官方默认参数的区域，仅文字换成 llwwds。 */
+.hero__stage .fluid-glass {
+  color: var(--page-ink);
+  font-family: 'Geist Variable', Geist, sans-serif;
+  font-weight: 600;
+}
+
+.hero__stage .fluid-glass__label {
+  white-space: pre-line;
+}
+
+@media (max-aspect-ratio: 9/16) {
+  .hero__footer {
+    padding-bottom: 20px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  .hero__hint {
+    display: none;
+  }
+}

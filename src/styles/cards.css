@@ -1,0 +1,99 @@
+.section--work {
+  gap: clamp(20px, 4vh, 56px);
+  padding-block: clamp(28px, 7vh, 120px);
+}
+
+.work__head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.work__eyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--page-muted);
+}
+
+.work__title {
+  margin: 0;
+  font-size: clamp(24px, min(4.4vw, 6vh), 56px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+
+.work__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.work__cell {
+  display: flex;
+  flex: none;
+}
+
+.work__hint {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--page-muted);
+}
+
+/* 9:16：4 卡横排改为横向滚动，卡片尺寸由 JS 按视口计算。 */
+.work__row--scroll {
+  justify-content: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-block: 8px 4px;
+  padding-inline: 2px;
+  scrollbar-width: none;
+}
+
+.work__row--scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.work__row--scroll .work__cell {
+  scroll-snap-align: center;
+}
+
+@media (max-aspect-ratio: 9/16) {
+  .section--work {
+    min-height: 100svh;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .work__row--scroll {
+    gap: 16px;
+  }
+}
+
+/* 矮屏（横向手机、小窗口）：压缩第二屏纵向留白，保证一屏内看全 4 卡。 */
+@media (max-height: 620px) {
+  .section--work {
+    gap: 10px;
+    padding-block: 12px;
+  }
+
+  .work__title {
+    font-size: clamp(20px, 3.2vw, 30px);
+  }
+
+  .work__eyebrow {
+    font-size: 10px;
+  }
+
+  .work__hint {
+    display: none;
+  }
+}
