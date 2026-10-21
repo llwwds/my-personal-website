@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FluidGlass from './components/FluidGlass/FluidGlass.jsx';
 import ReflectiveCard from './components/ReflectiveCard/ReflectiveCard.jsx';
+import reflectionVideo from './assets/reflection-night.mp4';
 import './styles/hero.css';
 import './styles/cards.css';
 
@@ -147,7 +148,7 @@ export default function App() {
                 status={item.status}
                 idLabel={item.idLabel}
                 idValue={item.idValue}
-                videoSrc="/videos/reflection-night.mp4"
+                videoSrc={reflectionVideo}
                 webcam={false}
                 tint="#ffffff"
                 metalness={1}

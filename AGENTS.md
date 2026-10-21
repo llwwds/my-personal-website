@@ -1,4 +1,4 @@
-# AGENTS.md — 我的个人网站
+# AGENTS.md — my-personal-website
 
 ## 项目定位
 
@@ -13,7 +13,7 @@ llwwds 的个人网站：黑底白字、单页上下滚动的简历型展示页�
 | `src/styles/hero.css`、`src/styles/cards.css` | 两屏各自的排版与 16:9 / 9:16 适配 |
 | `src/components/FluidGlass/` | 复刻的 React Bits Fluid Glass，**视为只读第三方源码** |
 | `src/components/ReflectiveCard/` | 复刻的 React Bits Reflective Card，**视为只读第三方源码** |
-| `public/videos/reflection-night.mp4` | Reflective Card 官方反光视频素材 |
+| `src/assets/reflection-night.mp4` | Reflective Card 官方反光视频素材（构建时内联进单文件 HTML，**不要**放回 `public/`） |
 | `THIRD_PARTY_NOTICES.md` | 复刻来源与许可证，改动复刻范围时必须同步 |
 
 ## 命令
@@ -21,11 +21,19 @@ llwwds 的个人网站：黑底白字、单页上下滚动的简历型展示页�
 ```bash
 npm install
 npm run dev      # http://127.0.0.1:5183/
-npm run build
+npm run build    # 产出单文件 dist/index.html（JS/CSS/字体/视频全内联）
 npm run preview
 ```
 
-无 lint、无测试脚本；改动的验证方式是 `npm run build` 通过 + 真实浏览器在 16:9 与 9:16 视口下截图核对。
+无 lint、无测试脚本；改动的验证方式是 `npm run build` 通过 + 真实浏览器在 16:9 与 9:16 视口下截图核对，并对 `dist/index.html` 用 `file://` 直接打开做冒烟验证。
+
+## 构建产物契约
+
+`dist/index.html` 必须是**单文件自包含**的（`vite-plugin-singlefile` + `base: './'`），双击即可打开、可放到任意子目录。因此：
+
+- 新增静态资源一律 `import` 进 JS（如 `import video from './assets/x.mp4'`），**不要**放 `public/`——`public/` 里的文件不会被内联，`file://` 下会 404。
+- 不要移除 `viteSingleFile()`、不要改 `base` 为绝对路径、不要开 `cssCodeSplit`，否则"双击打开"能力会退化。
+- 用浏览器验收时，**必须**验证 `file://.../dist/index.html`，不能只在 dev server 下看。
 
 ## 允许与禁止的改动
 

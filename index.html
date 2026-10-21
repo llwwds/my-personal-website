@@ -10,10 +10,87 @@
       name="description"
       content="llwwds 的个人网站：经历与项目作品展示。"
     />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        background: #000;
+        color: #fff;
+        font-family: 'Geist Variable', Geist, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      }
+      .notice {
+        display: none;
+        box-sizing: border-box;
+        max-width: 640px;
+        margin: 0 auto;
+        padding: clamp(32px, 12vh, 120px) 24px;
+        line-height: 1.7;
+      }
+      .notice h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .notice p {
+        margin: 0 0 14px;
+        color: rgba(255, 255, 255, 0.66);
+        font-size: 15px;
+      }
+      .notice code {
+        padding: 2px 6px;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.1);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 13px;
+        color: #fff;
+      }
+      .notice a {
+        color: #fff;
+        text-decoration-color: rgba(255, 255, 255, 0.4);
+        text-underline-offset: 3px;
+      }
+      .notice__cta {
+        display: inline-block;
+        margin-top: 6px;
+        padding: 10px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        font-size: 14px;
+        text-decoration: none;
+      }
+      .notice__cta:hover {
+        background: #fff;
+        color: #000;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // 根目录 index.html 是 Vite 的源码入口，浏览器无法在 file:// 下编译 JSX。
+      // 直接被双击打开时，用一段可操作的提示替代"全黑一片"。
+      (function () {
+        if (location.protocol !== 'file:') return;
+        var root = document.getElementById('root');
+        if (!root) return;
+        root.innerHTML =
+          '<div class="notice">' +
+          '<h1>这是源码入口，不是构建好的页面</h1>' +
+          '<p>你打开的是仓库根目录的 <code>index.html</code>，它只是一个开发入口（<code>&lt;script type="module" src="/src/main.jsx"&gt;</code>）。浏览器在 <code>file://</code> 下不会编译 JSX，所以页面是黑的。</p>' +
+          '<p>正确打开方式（任选其一）：</p>' +
+          '<p>1. 直接打开构建好的单文件页面：<a href="./dist/index.html">dist/index.html</a>（不需要服务器、不需要联网）<br>' +
+          '2. 或运行 <code>npm run dev</code> 后访问 <code>http://127.0.0.1:5183/</code></p>' +
+          '<a class="notice__cta" href="./dist/index.html">打开 dist/index.html</a>' +
+          '</div>';
+        var notice = root.querySelector('.notice');
+        if (notice) notice.style.display = 'block';
+      })();
+    </script>
   </body>
 </html>
